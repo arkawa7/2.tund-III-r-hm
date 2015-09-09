@@ -2,8 +2,9 @@
 
 	// LOGIN.PHP
 	
+	//errori muutujad peavad igal juhul olemas olema
 	$email_error= "";
-	
+	$password_error="";
 	//echo $_POST["email"];
 	
 	//kontrollime et keegi vajutas input nuppu
@@ -15,9 +16,22 @@
 		
 		$email_error = "";
 		
-	if(empty($_POST["email"] ) ) {
-			$email_error = "See vali on kohustuslik";
+		if(empty($_POST["email"] ) ) {
+				$email_error = "See vali on kohustuslik";
+				
+				//kontrollin, et parool ei ole tühi
+				if (empty($_POST["password"])) {
+					$password_error = "See väli on kohustuslik";
+				} else {
+				
+					//kui oleme siia jõudnud, siis parool ei ole tühi
+					// kontrollin, et oleks vähemalt 8 sümbolit pikk
+					if(strlen($_POST["password"]) <8) {
+						$password_error = "Peab olema vähemalt 8 tähemärki pikk!";
+					}	
+				}
 		}
+		
 	}
 
 ?>
